@@ -1,0 +1,94 @@
+* {
+    box-sizing: border-box;
+}
+/* Control */
+.control {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.control .iconfont {
+    display: inline-block;
+    margin: 16px;
+    font-size: 40px;
+    color: #fff;
+    cursor: pointer;
+}
+.control:hover {
+    opacity: 1;
+}
+
+/* Menu */
+.menu {
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    width: 220px;
+    height: 100vh;
+    background-color: #e2e2e4;
+    color: #1c1c1c;
+    font-size: 14px;
+}
+.menu .icon-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #929292;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+.menu .icon-close:hover {
+    color: #1c1c1c;
+}
+.menu .detail {
+    margin-top: 50px;
+}
+.menu .detail .tab {
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+}
+.menu .detail .tab.active {
+    background-color: #c5c7c7;
+    border-radius: 5px;
+    width: 205px;
+    margin: 0 auto;
+    padding-left: 8px;
+    cursor: pointer;
+}
+.menu .detail .iconfont {
+    margin-right: 4px;
+}
+.menu .detail .content {
+    display: none;
+    position: absolute;
+    left: 220px;
+    top: 0;
+    width: calc(100vw - 220px);
+    height: 100vh;
+    background-color: #fdfdfd;
+}
+.menu .detail .content.active {
+    display: block;
+}
+.menu .detail .content .header {
+    font-size: 40px;
+    color: #464545;
+    border-bottom: 2px solid #d0d0d0;
+    padding: 20px;
+    background-color: #fafafb;
+}
+.menu .detail .content .body {
+    padding: 20px;
+}
+.menu .detail .content textarea {
+    width: 100%;
+    height: 400px;
+    border: 1.5px solid;
+}
