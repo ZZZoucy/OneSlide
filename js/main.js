@@ -173,6 +173,40 @@ const Editor = {
     },
 };
 
+// 主题模块
+const Theme = {
+    init() {
+        this.$$figures = $$(".theme figure");
+
+        this.bind();
+        this.loadTheme();
+    },
+    bind() {
+        this.$$figures.forEach(
+            ($figure) =>
+                ($figure.onclick = () => {
+                    this.$$figures.forEach(($item) => $item.classList.remove("select"));
+                    $figure.classList.add("select");
+                    // 通过 dataset 可以获取到 html 中的 data-xxx 属性值
+                    this.setTheme($figure.dataset.theme);
+                })
+        );
+    },
+    setTheme(theme) {
+        localStorage.theme = theme;
+        location.reload();
+    },
+    loadTheme() {
+        let theme = localStorage.theme || "sky";
+        let $link = document.createElement("link");
+        $link.rel = "stylesheet";
+        $link.href = `css/theme/${theme}.css`;
+        document.head.appendChild($link);
+
+        [...this.$$figures].find(($figure) => $figure.dataset.theme === theme).classList.add("select");
+    },
+};
+
 // App代表总页面，init初始化，启动总入口
 const App = {
     init() {
@@ -180,4 +214,4 @@ const App = {
     },
 };
 
-App.init(Menu, Editor);
+App.init(Menu, Editor, Theme);
