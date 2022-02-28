@@ -123,6 +123,53 @@ const Menu = {
 const Editor = {
     init() {
         console.log("Editor init...");
+        this.$editInput = $(".editor textarea");
+        this.$saveBtn = $(".editor .button-save");
+        this.$slideContainer = $(".slides");
+        this.markdown = localStorage.markdown || `# one slide`;
+        this.bind();
+        this.start();
+    },
+
+    bind() {
+        this.$saveBtn.onclick = () => {
+            // localStorage 是 HTML5 的离线缓存新特性
+            localStorage.markdown = this.$editInput.value;
+            location.reload();
+        };
+    },
+    // 初始页面
+    start() {
+        this.$editInput.value = this.markdown;
+        $slideContainer.innerHTML = convert(this.markdown);
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            center: true,
+            hash: true,
+
+            transition: "slide", // none/fade/slide/convex/concave/zoom
+
+            // More info https://github.com/hakimel/reveal.js#dependencies
+            dependencies: [
+                {
+                    src: "plugin/markdown/marked.js",
+                    condition: function () {
+                        return !!document.querySelector("[data-markdown]");
+                    },
+                },
+                {
+                    src: "plugin/markdown/markdown.js",
+                    condition: function () {
+                        return !!document.querySelector("[data-markdown]");
+                    },
+                },
+                { src: "plugin/highlight/highlight.js" },
+                { src: "plugin/search/search.js", async: true },
+                { src: "plugin/zoom-js/zoom.js", async: true },
+                { src: "plugin/notes/notes.js", async: true },
+            ],
+        });
     },
 };
 
@@ -134,49 +181,3 @@ const App = {
 };
 
 App.init(Menu, Editor);
-
-// localStorage 是 HTML5 的离线缓存新特性
-function loadMarkdown(raw) {
-    localStorage.markdown = raw;
-    location.reload();
-}
-
-// 初始页面
-function start() {
-    let TPL = `
-		# 欢迎来到 One Slide
-		点击左上角开启你的 OneSlide 之旅吧～
-	`;
-    let html = convert(localStorage.markdown || TPL);
-    document.querySelector(".slides").innerHTML = html;
-    Reveal.initialize({
-        controls: true,
-        progress: true,
-        center: true,
-        hash: true,
-
-        transition: "slide", // none/fade/slide/convex/concave/zoom
-
-        // More info https://github.com/hakimel/reveal.js#dependencies
-        dependencies: [
-            {
-                src: "plugin/markdown/marked.js",
-                condition: function () {
-                    return !!document.querySelector("[data-markdown]");
-                },
-            },
-            {
-                src: "plugin/markdown/markdown.js",
-                condition: function () {
-                    return !!document.querySelector("[data-markdown]");
-                },
-            },
-            { src: "plugin/highlight/highlight.js" },
-            { src: "plugin/search/search.js", async: true },
-            { src: "plugin/zoom-js/zoom.js", async: true },
-            { src: "plugin/notes/notes.js", async: true },
-        ],
-    });
-}
-
-start();
