@@ -141,7 +141,7 @@ const Editor = {
     // 初始页面
     start() {
         this.$editInput.value = this.markdown;
-        $slideContainer.innerHTML = convert(this.markdown);
+        this.$slideContainer.innerHTML = convert(this.markdown);
         Reveal.initialize({
             controls: true,
             progress: true,
