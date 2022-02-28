@@ -6,7 +6,7 @@
 const isMain = (str) => /^#{1,2}(?!#)/.test(str);
 const isSub = (str) => /^#{3}(?!#)/.test(str);
 
-function convert(raw) {
+const convert = (raw) => {
     // 将用户输入的内容以统一的格式读取
     let arr = raw
         .split(/\n(?=\s*#)/)
@@ -76,7 +76,64 @@ function convert(raw) {
         }
     }
     return html;
-}
+};
+
+const $ = (s) => document.querySelector(s);
+const $$ = (s) => document.querySelectorAll(s);
+
+// 菜单模块
+const Menu = {
+    // 初始化函数
+    init() {
+        // 可以用 $... 命名，表示是一个对象
+        console.log("Menu init...");
+        this.$startIcon = $(".control .icon-start");
+        this.$menu = $(".menu");
+        this.$closeIcon = $(".menu .icon-close");
+        this.$$tabs = $$(".menu .tab");
+        this.$$contents = $$(".menu .content");
+        this.bind();
+    },
+    // 绑定事件函数
+    bind() {
+        // 菜单栏打开、关闭事件
+        this.$startIcon.onclick = () => {
+            this.$menu.classList.add("open");
+        };
+        this.$closeIcon.onclick = () => {
+            this.$menu.classList.remove("open");
+        };
+
+        // 菜单栏切换事件
+        this.$$tabs.forEach(
+            ($tab) =>
+                ($tab.onclick = () => {
+                    this.$$tabs.forEach(($node) => $node.classList.remove("active"));
+                    $tab.classList.add("active");
+                    // 当前选中的菜单栏的下标 [...xxx] 数组形式
+                    let index = [...this.$$tabs].indexOf($tab);
+                    this.$$contents.forEach(($node) => $node.classList.remove("active"));
+                    this.$$contents[index].classList.add("active");
+                })
+        );
+    },
+};
+
+// 编辑器模块
+const Editor = {
+    init() {
+        console.log("Editor init...");
+    },
+};
+
+// App代表总页面，init初始化，启动总入口
+const App = {
+    init() {
+        [...arguments].forEach((Module) => Module.init());
+    },
+};
+
+App.init(Menu, Editor);
 
 // localStorage 是 HTML5 的离线缓存新特性
 function loadMarkdown(raw) {

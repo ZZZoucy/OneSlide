@@ -29,11 +29,16 @@
     z-index: 100;
     top: 0;
     left: 0;
-    width: 220px;
+    width: 180px;
     height: 100vh;
     background-color: #e2e2e4;
     color: #1c1c1c;
     font-size: 14px;
+    transform: translateX(-100%);
+    transition: transform 0.3s;
+}
+.menu.open {
+    transform: translateX(0);
 }
 .menu .icon-close {
     position: absolute;
@@ -57,7 +62,7 @@
 .menu .detail .tab.active {
     background-color: #c5c7c7;
     border-radius: 5px;
-    width: 205px;
+    width: 165px;
     margin: 0 auto;
     padding-left: 8px;
     cursor: pointer;
@@ -65,17 +70,18 @@
 .menu .detail .iconfont {
     margin-right: 4px;
 }
-.menu .detail .content {
-    display: none;
+.menu .content {
     position: absolute;
-    left: 220px;
+    left: 180px;
     top: 0;
-    width: calc(100vw - 220px);
+    width: calc(100vw - 180px);
     height: 100vh;
     background-color: #fdfdfd;
+    transform: translateX(calc(100% + 180px));
+    transition: transform 0.3s;
 }
-.menu .detail .content.active {
-    display: block;
+.menu.open .content.active {
+    transform: translateX(0);
 }
 .menu .detail .content .header {
     font-size: 40px;
