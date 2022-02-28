@@ -147,8 +147,8 @@ const Editor = {
             progress: true,
             center: true,
             hash: true,
-
-            transition: "slide", // none/fade/slide/convex/concave/zoom
+            // 转场值
+            transition: localStorage.transition || "slide", // none/fade/slide/convex/concave/zoom
 
             // More info https://github.com/hakimel/reveal.js#dependencies
             dependencies: [
@@ -177,6 +177,7 @@ const Editor = {
 const Theme = {
     init() {
         this.$$figures = $$(".theme figure");
+        this.$transition = $(".theme .transition");
 
         this.bind();
         this.loadTheme();
@@ -191,6 +192,11 @@ const Theme = {
                     this.setTheme($figure.dataset.theme);
                 })
         );
+        // 转场事件
+        this.$transition.onchange = function () {
+            localStorage.transition = this.value;
+            location.reload();
+        };
     },
     setTheme(theme) {
         localStorage.theme = theme;
@@ -204,6 +210,7 @@ const Theme = {
         document.head.appendChild($link);
 
         [...this.$$figures].find(($figure) => $figure.dataset.theme === theme).classList.add("select");
+        this.$transition.value = localStorage.value || "slide";
     },
 };
 

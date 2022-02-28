@@ -107,6 +107,7 @@ button:hover {
 .menu .detail .content .body {
     padding: 20px;
     color: #464545;
+    padding-bottom: 100px;
 }
 .menu .detail .content textarea {
     width: 100%;
@@ -124,6 +125,12 @@ button:hover {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+}
+.menu .theme h5 {
+    margin-top: 30px;
+}
+.menu .theme select {
+    margin-top: 16px;
 }
 .menu .themes figure {
     margin-top: 30px;
