@@ -124,6 +124,18 @@ button:hover {
     outline: none;
     color: #464545;
 }
+
+/* 隐藏 input 的上传文件按钮 */
+.menu .editor [type="file"] {
+    display: none;
+}
+.menu .editor .uploader {
+    margin-top: 12px;
+}
+.menu .editor label {
+    cursor: pointer;
+}
+
 .menu .content button {
     margin-top: 16px;
 }
