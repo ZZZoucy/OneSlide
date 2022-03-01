@@ -120,6 +120,7 @@ const Menu = {
 };
 
 // 上传图片模块
+/*
 const ImgUploader = {
     init() {
         this.$fileInput = $("#img-uploader");
@@ -174,6 +175,7 @@ const ImgUploader = {
         $textarea.setSelectionRange(start, start + text.length);
     },
 };
+*/
 
 // 编辑器模块
 const Editor = {
@@ -325,4 +327,5 @@ const App = {
     },
 };
 
-App.init(Menu, ImgUploader, Editor, Theme, Print);
+App.init(Menu, Editor, Theme, Print);
+// ImgUploader,
