@@ -9,7 +9,7 @@ const isSub = (str) => /^#{3}(?!#)/.test(str);
 const convert = (raw) => {
     // 将用户输入的内容以统一的格式读取
     let arr = raw
-        .split(/\n(?=\s*#)/)
+        .split(/\n(?=\s*#{1,3}[^#])/)
         .filter((s) => s != "")
         .map((s) => s.trim());
 
@@ -145,7 +145,7 @@ const Editor = {
         Reveal.initialize({
             controls: true,
             progress: true,
-            center: true,
+            center: localStorage.align === "left-top" ? false : true,
             hash: true,
             // 转场值
             transition: localStorage.transition || "slide", // none/fade/slide/convex/concave/zoom
@@ -178,6 +178,8 @@ const Theme = {
     init() {
         this.$$figures = $$(".theme figure");
         this.$transition = $(".theme .transition");
+        this.$align = $(".theme .align");
+        this.$reveal = $(".reveal");
 
         this.bind();
         this.loadTheme();
@@ -197,6 +199,11 @@ const Theme = {
             localStorage.transition = this.value;
             location.reload();
         };
+        // 对齐设置
+        this.$align.onchange = function () {
+            localStorage.align = this.value;
+            location.reload();
+        };
     },
     setTheme(theme) {
         localStorage.theme = theme;
@@ -210,7 +217,9 @@ const Theme = {
         document.head.appendChild($link);
 
         [...this.$$figures].find(($figure) => $figure.dataset.theme === theme).classList.add("select");
-        this.$transition.value = localStorage.value || "slide";
+        this.$transition.value = localStorage.transition || "slide";
+        this.$align.value = localStorage.align || "center";
+        this.$reveal.classList.add(this.$align.value);
     },
 };
 

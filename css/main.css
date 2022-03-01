@@ -14,6 +14,12 @@ button {
 button:hover {
     opacity: 1;
 }
+.reveal.left-top section {
+    text-align: left;
+}
+.reveal.left-top .slides > section:first-child {
+    text-align: center;
+}
 /* Control */
 .control {
     position: fixed;
@@ -151,4 +157,8 @@ button:hover {
 .menu .themes figcaption {
     padding: 10px;
     color: #464545;
+}
+.menu .themes .transition,
+.menu .themes .align {
+    margin-top: 20px;
 }
