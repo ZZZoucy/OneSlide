@@ -20,6 +20,7 @@ button:hover {
 .reveal.left-top .slides > section:first-child {
     text-align: center;
 }
+
 /* Control */
 .control {
     position: fixed;
@@ -115,6 +116,19 @@ button:hover {
     color: #464545;
     padding-bottom: 100px;
 }
+
+.menu .detail .content .body.explain {
+    font-size: 16px;
+    line-height: 30px;
+}
+
+.menu .detail .content .body.explain table {
+    margin: 16px auto;
+    width: 100%;
+    text-align: center;
+}
+
+/* 编辑器样式 */
 .menu .detail .content textarea {
     width: 100%;
     height: 400px;
@@ -139,6 +153,8 @@ button:hover {
 .menu .content button {
     margin-top: 16px;
 }
+
+/* 主题区样式 */
 .menu .themes {
     display: flex;
     flex-wrap: wrap;

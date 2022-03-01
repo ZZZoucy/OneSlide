@@ -184,7 +184,11 @@ const Editor = {
         this.$editInput = $(".editor textarea");
         this.$saveBtn = $(".editor .button-save");
         this.$slideContainer = $(".slides");
-        this.markdown = localStorage.markdown || `# one slide`;
+        this.markdown =
+            localStorage.markdown ||
+            ` # one slide 
+                    点击左上角，即刻开启你的 OneSlide 之旅～
+            `;
         this.bind();
         this.start();
     },
