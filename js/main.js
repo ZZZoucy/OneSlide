@@ -223,6 +223,45 @@ const Theme = {
     },
 };
 
+// 下载PDF
+const Print = {
+    init() {
+        this.$download = $(".download");
+        this.bind();
+        this.start();
+    },
+
+    bind() {
+        this.$download.addEventListener("click", () => {
+            // 如果点击下载PDF
+            // 实现打开一个新的页面，自动跳出保存到PDF的窗口
+            // 需要给加一个 a 标签，以及 target 和 href 属性
+            let $link = document.createElement("a");
+            $link.setAttribute("target", "_blank");
+            $link.setAttribute("href", location.href.replace(/#\/.*/, "?print-pdf"));
+            $link.click();
+        });
+
+        // 如果取消下载，就关闭窗口即可
+        window.onafterprint = () => {
+            window.close();
+        };
+    },
+
+    start() {
+        let link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.type = "text/css";
+        if (window.location.search.match(/print-pdf/gi)) {
+            link.href = "css/print/pdf.css";
+            window.print();
+        } else {
+            link.href = "css/print/paper.css";
+        }
+        document.head.appendChild(link);
+    },
+};
+
 // App代表总页面，init初始化，启动总入口
 const App = {
     init() {
@@ -230,4 +269,4 @@ const App = {
     },
 };
 
-App.init(Menu, Editor, Theme);
+App.init(Menu, Editor, Theme, Print);

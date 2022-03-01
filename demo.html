@@ -25,11 +25,16 @@
 
         <!-- Printing and PDF exports -->
         <script>
-            var link = document.createElement("link");
-            link.rel = "stylesheet";
-            link.type = "text/css";
-            link.href = window.location.search.match(/print-pdf/gi) ? "css/print/pdf.css" : "css/print/paper.css";
-            document.getElementsByTagName("head")[0].appendChild(link);
+            // var link = document.createElement("link");
+            // link.rel = "stylesheet";
+            // link.type = "text/css";
+            // if (window.location.search.match(/print-pdf/gi)) {
+            //     link.href = "css/print/pdf.css";
+            //     window.print();
+            // } else {
+            //     link.href = "css/print/paper.css";
+            // }
+            // document.getElementsByTagName("head")[0].appendChild(link);
         </script>
 
         <!--[if lt IE 9]>
@@ -46,7 +51,7 @@
             <div class="detail">
                 <div class="tab active"><span class="iconfont icon-edit"></span>内容编辑</div>
                 <div class="tab"><span class="iconfont icon-theme"></span>主题与特效</div>
-                <div class="tab"><span class="iconfont icon-download"></span>下载PDF</div>
+                <div class="tab download"><span class="iconfont icon-download"></span>下载PDF</div>
                 <div class="tab"><span class="iconfont icon-explain"></span>使用说明</div>
                 <div class="content active">
                     <div class="header">编辑</div>
